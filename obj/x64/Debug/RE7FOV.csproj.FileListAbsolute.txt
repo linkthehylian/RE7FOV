@@ -1,0 +1,11 @@
+D:\Projects\RE7FOV\bin\x64\Debug\RE7FOV.exe.config
+D:\Projects\RE7FOV\bin\x64\Debug\RE7FOV.exe
+D:\Projects\RE7FOV\bin\x64\Debug\RE7FOV.pdb
+D:\Projects\RE7FOV\obj\x64\Debug\RE7FOV.csproj.AssemblyReference.cache
+D:\Projects\RE7FOV\obj\x64\Debug\RE7FOV.csproj.SuggestedBindingRedirects.cache
+D:\Projects\RE7FOV\obj\x64\Debug\RE7FOV.Form1.resources
+D:\Projects\RE7FOV\obj\x64\Debug\RE7FOV.Properties.Resources.resources
+D:\Projects\RE7FOV\obj\x64\Debug\RE7FOV.csproj.GenerateResource.cache
+D:\Projects\RE7FOV\obj\x64\Debug\RE7FOV.csproj.CoreCompileInputs.cache
+D:\Projects\RE7FOV\obj\x64\Debug\RE7FOV.exe
+D:\Projects\RE7FOV\obj\x64\Debug\RE7FOV.pdb

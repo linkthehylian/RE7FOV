@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32407.343
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RE7FOV", "RE7FOV.csproj", "{B9DE729F-2323-402C-9D82-DA9786C72F67}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B9DE729F-2323-402C-9D82-DA9786C72F67}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B9DE729F-2323-402C-9D82-DA9786C72F67}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B9DE729F-2323-402C-9D82-DA9786C72F67}.Debug|x64.ActiveCfg = Debug|x64
+		{B9DE729F-2323-402C-9D82-DA9786C72F67}.Debug|x64.Build.0 = Debug|x64
+		{B9DE729F-2323-402C-9D82-DA9786C72F67}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B9DE729F-2323-402C-9D82-DA9786C72F67}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B9DE729F-2323-402C-9D82-DA9786C72F67}.Release|x64.ActiveCfg = Release|x64
+		{B9DE729F-2323-402C-9D82-DA9786C72F67}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CDA200CD-3AFE-43DA-9782-F3DC9D56B10D}
+	EndGlobalSection
+EndGlobal
