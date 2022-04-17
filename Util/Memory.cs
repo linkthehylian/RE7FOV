@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
-using System.Windows.Forms;
 
 namespace RE7FOV.Util
 {
@@ -34,7 +33,7 @@ namespace RE7FOV.Util
         {
             byte[] dataBuffer = new byte[Marshal.SizeOf(typeof(T))];
             int bytesRead = 0;
-            Util.Import.ReadProcessMemory((int)processHandle, address, dataBuffer, dataBuffer.Length, ref bytesRead);
+            Import.ReadProcessMemory((int)processHandle, address, dataBuffer, dataBuffer.Length, ref bytesRead);
             return ByteArrayToStructure<T>(dataBuffer);
         }
 
@@ -42,7 +41,7 @@ namespace RE7FOV.Util
         {
             byte[] buffer = StructureToByteArray(value);
             int bytesRead = 0;
-            Util.Import.WriteProcessMemory((int)processHandle, address, buffer, buffer.Length, ref bytesRead);
+            Import.WriteProcessMemory((int)processHandle, address, buffer, buffer.Length, ref bytesRead);
         }
 
         /// <summary>

@@ -19,3 +19,13 @@ D:\Projects\RE7FOV\obj\Debug\RE7FOV.pdb
 D:\Projects\RE7FOV\bin\Debug\RE7FOV.exe.config
 D:\Projects\RE7FOV\bin\Debug\RE7FOV.exe
 D:\Projects\RE7FOV\bin\Debug\RE7FOV.pdb
+C:\Users\andyp\Documents\GitHub\RE7FOV\bin\Debug\RE7FOV.exe.config
+C:\Users\andyp\Documents\GitHub\RE7FOV\bin\Debug\RE7FOV.exe
+C:\Users\andyp\Documents\GitHub\RE7FOV\bin\Debug\RE7FOV.pdb
+C:\Users\andyp\Documents\GitHub\RE7FOV\obj\Debug\RE7FOV.csproj.AssemblyReference.cache
+C:\Users\andyp\Documents\GitHub\RE7FOV\obj\Debug\RE7FOV.Form1.resources
+C:\Users\andyp\Documents\GitHub\RE7FOV\obj\Debug\RE7FOV.Properties.Resources.resources
+C:\Users\andyp\Documents\GitHub\RE7FOV\obj\Debug\RE7FOV.csproj.GenerateResource.cache
+C:\Users\andyp\Documents\GitHub\RE7FOV\obj\Debug\RE7FOV.csproj.CoreCompileInputs.cache
+C:\Users\andyp\Documents\GitHub\RE7FOV\obj\Debug\RE7FOV.exe
+C:\Users\andyp\Documents\GitHub\RE7FOV\obj\Debug\RE7FOV.pdb

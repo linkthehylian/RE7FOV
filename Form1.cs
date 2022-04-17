@@ -11,6 +11,7 @@ using System.Diagnostics;
 using System.Threading;
 using System.Runtime;
 using System.Runtime.InteropServices;
+using System.IO;
 using RE7FOV.Util;
 
 namespace RE7FOV
@@ -20,6 +21,7 @@ namespace RE7FOV
         ulong fovAddr;
         int fovValue;
         int actualFOVValue;
+        IniFile config;
 
         public Form1()
         {
@@ -28,6 +30,9 @@ namespace RE7FOV
 
         private async void Form1_Load(object sender, EventArgs e)
         {
+            fovBar.Enabled = false;
+            config = new IniFile("RE7FOV.ini");
+            if (!File.Exists("RE7FOV.ini")) config.Write("FOV", "0", "RE7FOV");
             await FindRE7();
         }
 
@@ -48,13 +53,20 @@ namespace RE7FOV
 
             for (int i = 0; i < 6; i++)
             {
-                 tempAddr = Memory.ReadMemory<ulong>(tempAddr + offsets[i]);
+                tempAddr = Memory.ReadMemory<ulong>(tempAddr + offsets[i]);
                 await Task.Delay(100);
             }
             fovAddr = tempAddr + 0x28;
-            fovValue = GetFOVValue();
-            actualFOVValue = GetActualFOV(fovValue);
+            fovValue = GetFOVValue(); //Field of Vision value as displayed in Cheat Engine | 70 = 0, 80 = 2, 90 = 4
+            if (File.Exists("RE7FOV.ini") && config.KeyExists("FOV"))
+            {
+                fovValue = int.Parse(config.Read("FOV"));
+                fovValueLabel.Text = actualFOVValue.ToString();
+                Memory.WriteMemory<int>(fovAddr, fovValue);
+            }
+            actualFOVValue = GetActualFOV(fovValue); //Field of Vision value as shown in-game
             fovValueLabel.Text = actualFOVValue.ToString();
+            fovBar.Enabled = true;
             if (fovValue < fovBar.Maximum + 1) fovBar.Value = fovValue;
 
         }
@@ -80,6 +92,20 @@ namespace RE7FOV
             Memory.WriteMemory<int>(fovAddr, fovBar.Value);
             fovValue = fovBar.Value;
             fovValueLabel.Text = GetActualFOV(fovValue).ToString();
+        }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start("https://github.com/linkthehylian/RE7FOV");
+        }
+
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if (File.Exists("RE7FOV.ini") && int.Parse(config.Read("FOV")) != fovValue)
+            {
+                fovValue = Memory.ReadMemory<int>(fovAddr);
+                config.Write("FOV", fovValue.ToString(), "RE7FOV");
+            }
         }
     }
 }
