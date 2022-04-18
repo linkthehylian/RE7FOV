@@ -2,3 +2,7 @@
 *.exe
 obj/Debug/RE7FOV.exe
 *.exe
+*.config
+*.pdb
+*.cache
+*.pdb
