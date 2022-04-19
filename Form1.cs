@@ -36,8 +36,6 @@ namespace RE7FOV
             await FindRE7();
         }
 
-        Random random = new Random();
-
         async Task FindRE7()
         {
             while (true)

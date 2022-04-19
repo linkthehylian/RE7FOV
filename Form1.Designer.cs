@@ -76,6 +76,7 @@ namespace RE7FOV
             this.label1.Size = new System.Drawing.Size(134, 13);
             this.label1.TabIndex = 3;
             this.label1.Text = "Developed by linkthehylian";
+            this.label1.Visible = false;
             // 
             // linkLabel1
             // 
