@@ -29,3 +29,14 @@ C:\Users\andyp\Documents\GitHub\RE7FOV\obj\Debug\RE7FOV.csproj.GenerateResource.
 C:\Users\andyp\Documents\GitHub\RE7FOV\obj\Debug\RE7FOV.csproj.CoreCompileInputs.cache
 C:\Users\andyp\Documents\GitHub\RE7FOV\obj\Debug\RE7FOV.exe
 C:\Users\andyp\Documents\GitHub\RE7FOV\obj\Debug\RE7FOV.pdb
+D:\Projects\Repos\RE7FOV\bin\Debug\RE7FOV.exe.config
+D:\Projects\Repos\RE7FOV\bin\Debug\RE7FOV.exe
+D:\Projects\Repos\RE7FOV\bin\Debug\RE7FOV.pdb
+D:\Projects\Repos\RE7FOV\obj\Debug\RE7FOV.csproj.AssemblyReference.cache
+D:\Projects\Repos\RE7FOV\obj\Debug\RE7FOV.csproj.SuggestedBindingRedirects.cache
+D:\Projects\Repos\RE7FOV\obj\Debug\RE7FOV.Main.resources
+D:\Projects\Repos\RE7FOV\obj\Debug\RE7FOV.Properties.Resources.resources
+D:\Projects\Repos\RE7FOV\obj\Debug\RE7FOV.csproj.GenerateResource.cache
+D:\Projects\Repos\RE7FOV\obj\Debug\RE7FOV.csproj.CoreCompileInputs.cache
+D:\Projects\Repos\RE7FOV\obj\Debug\RE7FOV.exe
+D:\Projects\Repos\RE7FOV\obj\Debug\RE7FOV.pdb
