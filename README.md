@@ -7,7 +7,7 @@ Also compatible with **BIOHAZARD 7 resident evil グロテスクVer.** (same ["r
 ### How it works
 - Open the game and load a save
 - Launch RE7FOV
-- Adjust the slider to your desired Field of Vision
+- Adjust the FOV slider to your desired value
 
 ### Requirements
 - .NET Framework 4.7.2 or higher
