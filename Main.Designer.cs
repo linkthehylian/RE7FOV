@@ -95,7 +95,7 @@ namespace RE7FOV
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(28, 13);
             this.label2.TabIndex = 5;
-            this.label2.Text = "v1.2";
+            this.label2.Text = "v1.3";
             // 
             // Main
             // 
