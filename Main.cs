@@ -23,7 +23,7 @@ namespace RE7FOV
         {
             fovBar.Enabled = false;
             config = new IniFile();
-            if (!File.Exists("RE7FOV.ini")) config.Write("FOV", "4", "RE7FOV"); //Default to "4" ("90" in-game) because who realistically uses 70 FOV lmao
+            if (!File.Exists("RE7FOV.ini")) config.Write("FOV", "6", "RE7FOV"); //Default to "6" ("100" in-game) because who realistically uses 70 FOV lmao
             await FindRE7();
         }
 
@@ -57,17 +57,17 @@ namespace RE7FOV
 
         async void SetFOV()
         {
-            ulong baseAddr = (ulong)Memory.process.MainModule.BaseAddress + 0x081F4EF8;
+            ulong baseAddr = (ulong)Memory.process.MainModule.BaseAddress + 0x08F8D9A8;
             ulong tempAddr = Memory.ReadMemory<ulong>(baseAddr);
 
-            ulong[] offsets = { 0x28, 0x78, 0xA8, 0x28, 0x30, 0x60 };
+            ulong[] offsets = { 0xD8, 0x178, 0xD8, 0x178, 0x50, 0x38 };
 
             for (int i = 0; i < 6; i++)
             {
                 tempAddr = Memory.ReadMemory<ulong>(tempAddr + offsets[i]);
                 await Task.Delay(100);
             }
-            fovAddr = tempAddr + 0x28;
+            fovAddr = tempAddr + 0x148;
             fovValue = GetFOVValue(); //Field of Vision value as displayed in Cheat Engine | 70 = 0, 80 = 2, 90 = 4
             if (File.Exists("RE7FOV.ini") && config.KeyExists("FOV"))
             {

@@ -42,12 +42,12 @@ namespace RE7FOV
             // fovBar
             // 
             this.fovBar.AutoSize = false;
-            this.fovBar.Location = new System.Drawing.Point(12, 30);
+            this.fovBar.Location = new System.Drawing.Point(12, 32);
             this.fovBar.Maximum = 22;
             this.fovBar.Name = "fovBar";
             this.fovBar.Size = new System.Drawing.Size(416, 30);
             this.fovBar.TabIndex = 0;
-            this.fovBar.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.fovBar.TickStyle = System.Windows.Forms.TickStyle.Both;
             this.fovBar.Scroll += new System.EventHandler(this.fovBar_Scroll);
             // 
             // fovLabel
@@ -71,12 +71,11 @@ namespace RE7FOV
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(156, 89);
+            this.label1.Location = new System.Drawing.Point(9, 89);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(134, 13);
             this.label1.TabIndex = 3;
             this.label1.Text = "Developed by linkthehylian";
-            this.label1.Visible = false;
             // 
             // linkLabel1
             // 
@@ -96,7 +95,7 @@ namespace RE7FOV
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(28, 13);
             this.label2.TabIndex = 5;
-            this.label2.Text = "v1.1";
+            this.label2.Text = "v1.2";
             // 
             // Main
             // 
