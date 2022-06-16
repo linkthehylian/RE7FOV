@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using RE7FOV.Util;
 
 namespace RE7FOV
@@ -60,14 +61,14 @@ namespace RE7FOV
             ulong baseAddr = (ulong)Memory.process.MainModule.BaseAddress + 0x08F8D9A8;
             ulong tempAddr = Memory.ReadMemory<ulong>(baseAddr);
 
-            ulong[] offsets = { 0xD8, 0x178, 0xD8, 0x178, 0x50, 0x38 };
+            ulong[] fovoffsets = { 0xD8, 0x178, 0xD8, 0x178, 0x50, 0x38, 0x148 };
 
             for (int i = 0; i < 6; i++)
             {
-                tempAddr = Memory.ReadMemory<ulong>(tempAddr + offsets[i]);
+                tempAddr = Memory.ReadMemory<ulong>(tempAddr + fovoffsets[i]);
                 await Task.Delay(100);
             }
-            fovAddr = tempAddr + 0x148;
+            fovAddr = tempAddr + fovoffsets.Last();
             fovValue = GetFOVValue(); //Field of Vision value as displayed in Cheat Engine | 70 = 0, 80 = 2, 90 = 4
             if (File.Exists("RE7FOV.ini") && config.KeyExists("FOV"))
             {
