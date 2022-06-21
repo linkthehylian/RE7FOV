@@ -22,9 +22,11 @@ namespace RE7FOV
 
         private async void Form1_Load(object sender, EventArgs e)
         {
+            fovBar.Value = 0;
+            fovValueLabel.Text = "0";
             fovBar.Enabled = false;
             config = new IniFile();
-            if (!File.Exists("RE7FOV.ini")) config.Write("FOV", "6", "RE7FOV"); //Default to "6" ("100" in-game) because who realistically uses 70 FOV lmao
+            if (!File.Exists("RE7FOV.ini")) config.Write("FOV", "7", "RE7FOV"); //Default to "7" ("105°" in-game) because who realistically uses 70 FOV lmao
             await FindRE7();
         }
 
@@ -37,23 +39,63 @@ namespace RE7FOV
                 await Task.Delay(1000);
             }
             Text = $"RE7FOV - {Memory.process.ProcessName}.exe";
-            SetFOV();
-            /*while (true)
+            if (checkBox1.Checked) //Not A Hero
+                SetFOVDLC1();
+            if (checkBox2.Checked) //End of Zoe
+                SetFOVDLC2();
+            else
+                SetFOV();
+        }
+
+        async void SetFOVDLC1()
+        {
+            ulong baseAddr = (ulong)Memory.process.MainModule.BaseAddress + 0x08F8D9A8;
+            ulong tempAddr = Memory.ReadMemory<ulong>(baseAddr);
+            ulong[] fovoffsets = { 0xE8, 0x118, 0x258, 0x20, 0x10, 0x40, 0x9E8 }; //Not A Hero FOV offsets
+
+            for (int i = 0; i < 6; i++)
             {
-                ulong hAddr = Memory.ReadMemory<ulong>((ulong)Memory.process.MainModule.BaseAddress + 0x0822AB00); //RE7 process base address + Health pointer address
-                float health = Memory.ReadMemory<float>(hAddr + 0x2C4); //Health value + offset in memory
-                if (health > 0 && health != 1000f) //Health is temporarily set to 1000 once a save is loaded and gets properly assigned once the player takes control of Ethan
-                {
-                    SetFOV();
-                    break;
-                }
-                else
-                {
-                    await Task.Delay(1000);
-                }
-                if (fovValueLabel.Text != "Not in-game")
-                    fovValueLabel.Text = "Not in-game";
-            }*/
+                tempAddr = Memory.ReadMemory<ulong>(tempAddr + fovoffsets[i]);
+                await Task.Delay(100);
+            }
+            fovAddr = tempAddr + fovoffsets.Last();
+            fovValue = GetFOVValue(); //Field of Vision value as displayed in Cheat Engine | 70 = 0, 80 = 2, 90 = 4
+            if (File.Exists("RE7FOV.ini") && config.KeyExists("FOV"))
+            {
+                fovValue = int.Parse(config.Read("FOV"));
+                fovValueLabel.Text = actualFOVValue.ToString();
+                Memory.WriteMemory<int>(fovAddr, fovValue);
+            }
+            actualFOVValue = GetActualFOV(fovValue); //Field of Vision value as shown in-game
+            fovValueLabel.Text = actualFOVValue.ToString();
+            fovBar.Enabled = true;
+            if (fovValue < fovBar.Maximum + 1) fovBar.Value = fovValue;
+        }
+
+        async void SetFOVDLC2()
+        {
+            ulong baseAddr = (ulong)Memory.process.MainModule.BaseAddress + 0x08F8D9A8;
+            ulong tempAddr = Memory.ReadMemory<ulong>(baseAddr);
+
+            ulong[] fovoffsets = { 0xE0, 0x98, 0x120, 0x188, 0xC0, 0x60, 0x18 }; //End of Zoe FOV offsets
+
+            for (int i = 0; i < 6; i++)
+            {
+                tempAddr = Memory.ReadMemory<ulong>(tempAddr + fovoffsets[i]);
+                await Task.Delay(100);
+            }
+            fovAddr = tempAddr + fovoffsets.Last();
+            fovValue = GetFOVValue(); //Field of Vision value as displayed in Cheat Engine | 70 = 0, 80 = 2, 90 = 4
+            if (File.Exists("RE7FOV.ini") && config.KeyExists("FOV"))
+            {
+                fovValue = int.Parse(config.Read("FOV"));
+                fovValueLabel.Text = actualFOVValue.ToString();
+                Memory.WriteMemory<int>(fovAddr, fovValue);
+            }
+            actualFOVValue = GetActualFOV(fovValue); //Field of Vision value as shown in-game
+            fovValueLabel.Text = actualFOVValue.ToString();
+            fovBar.Enabled = true;
+            if (fovValue < fovBar.Maximum + 1) fovBar.Value = fovValue;
         }
 
         async void SetFOV()
@@ -61,7 +103,7 @@ namespace RE7FOV
             ulong baseAddr = (ulong)Memory.process.MainModule.BaseAddress + 0x08F8D9A8;
             ulong tempAddr = Memory.ReadMemory<ulong>(baseAddr);
 
-            ulong[] fovoffsets = { 0xD8, 0x178, 0xD8, 0x178, 0x50, 0x38, 0x148 };
+            ulong[] fovoffsets = { 0xD8, 0x178, 0xD8, 0x178, 0x50, 0x38, 0x148 }; //Main campaign FOV offsets
 
             for (int i = 0; i < 6; i++)
             {
@@ -117,6 +159,32 @@ namespace RE7FOV
                 fovValue = Memory.ReadMemory<int>(fovAddr);
                 config.Write("FOV", fovValue.ToString(), "RE7FOV");
             }
+        }
+
+        private void Main_MouseHover(object sender, EventArgs e)
+        {
+            new ToolTip().SetToolTip(pictureBox1, "Refresh");
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            Form1_Load(sender, e);
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox1.Checked)
+                checkBox2.Enabled = false;
+            else
+                checkBox2.Enabled = true;
+        }
+
+        private void checkBox2_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox2.Checked)
+                checkBox1.Enabled = false;
+            else
+                checkBox1.Enabled = true;
         }
     }
 }
