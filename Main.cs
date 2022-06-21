@@ -69,6 +69,7 @@ namespace RE7FOV
             actualFOVValue = GetActualFOV(fovValue); //Field of Vision value as shown in-game
             fovValueLabel.Text = actualFOVValue.ToString();
             fovBar.Enabled = true;
+            pictureBox1.Visible = true;
             if (fovValue < fovBar.Maximum + 1) fovBar.Value = fovValue;
         }
 
@@ -95,6 +96,7 @@ namespace RE7FOV
             actualFOVValue = GetActualFOV(fovValue); //Field of Vision value as shown in-game
             fovValueLabel.Text = actualFOVValue.ToString();
             fovBar.Enabled = true;
+            pictureBox1.Visible = true;
             if (fovValue < fovBar.Maximum + 1) fovBar.Value = fovValue;
         }
 
@@ -121,6 +123,7 @@ namespace RE7FOV
             actualFOVValue = GetActualFOV(fovValue); //Field of Vision value as shown in-game
             fovValueLabel.Text = actualFOVValue.ToString();
             fovBar.Enabled = true;
+            pictureBox1.Visible = true;
             if (fovValue < fovBar.Maximum + 1) fovBar.Value = fovValue;
         }
 
@@ -174,17 +177,29 @@ namespace RE7FOV
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
             if (checkBox1.Checked)
+            {
                 checkBox2.Enabled = false;
+                Form1_Load(sender, e);
+            }
             else
+            {
                 checkBox2.Enabled = true;
+                Form1_Load(sender, e);
+            }
         }
 
         private void checkBox2_CheckedChanged(object sender, EventArgs e)
         {
             if (checkBox2.Checked)
+            {
                 checkBox1.Enabled = false;
+                Form1_Load(sender, e);
+            }
             else
+            {
                 checkBox1.Enabled = true;
+                Form1_Load(sender, e);
+            }
         }
     }
 }

@@ -80,6 +80,7 @@ namespace RE7FOV
             this.label1.Size = new System.Drawing.Size(134, 13);
             this.label1.TabIndex = 3;
             this.label1.Text = "Developed by linkthehylian";
+            this.label1.Visible = false;
             // 
             // linkLabel1
             // 
@@ -110,12 +111,13 @@ namespace RE7FOV
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pictureBox1.TabIndex = 6;
             this.pictureBox1.TabStop = false;
+            this.pictureBox1.Visible = false;
             this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(162, 89);
+            this.checkBox1.Location = new System.Drawing.Point(131, 89);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(79, 17);
             this.checkBox1.TabIndex = 7;
@@ -126,7 +128,7 @@ namespace RE7FOV
             // checkBox2
             // 
             this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(248, 89);
+            this.checkBox2.Location = new System.Drawing.Point(216, 89);
             this.checkBox2.Name = "checkBox2";
             this.checkBox2.Size = new System.Drawing.Size(79, 17);
             this.checkBox2.TabIndex = 8;
