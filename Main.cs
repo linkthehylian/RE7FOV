@@ -8,19 +8,19 @@ using RE7FOV.Util;
 
 namespace RE7FOV
 {
-    public partial class Main : Form
+    public partial class MainForm : Form
     {
         ulong fovAddr;
         int fovValue;
         int actualFOVValue;
         IniFile config;
 
-        public Main()
+        public MainForm()
         {
             InitializeComponent();
         }
 
-        private async void Form1_Load(object sender, EventArgs e)
+        private async void MainForm_Load(object sender, EventArgs e)
         {
             fovBar.Value = 0;
             fovValueLabel.Text = "0";
@@ -39,26 +39,40 @@ namespace RE7FOV
                 await Task.Delay(1000);
             }
             Text = $"RE7FOV - {Memory.process.ProcessName}.exe";
-            if (checkBox1.Checked) //Not A Hero
-                SetFOVDLC1();
-            if (checkBox2.Checked) //End of Zoe
-                SetFOVDLC2();
+            if (dlc1Box.Checked) //Not A Hero
+                SetFOV(FOVOffsets.dlc1);
+            if (dlc2Box.Checked) //End of Zoe
+                SetFOV(FOVOffsets.dlc2);
             else
-                SetFOV();
+                SetFOV(FOVOffsets.main);
         }
 
-        async void SetFOVDLC1()
+        private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            ulong baseAddr = (ulong)Memory.process.MainModule.BaseAddress + 0x08F8D9A8;
-            ulong tempAddr = Memory.ReadMemory<ulong>(baseAddr);
-            ulong[] fovoffsets = { 0xE8, 0x118, 0x258, 0x20, 0x10, 0x40, 0x9E8 }; //Not A Hero FOV offsets
-
-            for (int i = 0; i < 6; i++)
+            if (fovBar.Enabled && File.Exists("RE7FOV.ini") && int.Parse(config.Read("FOV")) != fovValue)
             {
-                tempAddr = Memory.ReadMemory<ulong>(tempAddr + fovoffsets[i]);
+                fovValue = Memory.ReadMemory<int>(fovAddr);
+                config.Write("FOV", fovValue.ToString(), "RE7FOV");
+            }
+        }
+
+        /// <summary>
+        /// Set the FOV in-game
+        /// </summary>
+        /// <param name="offsets">different offsets depending on if playing DLC or not</param>
+        async void SetFOV(ulong[] offsets)
+        {
+            ulong baseAddr = (ulong)Memory.process.MainModule.BaseAddress + 0x08F8D9A8; //dx11 = 0x081F4EF8
+            //offsets = FOVOffsets.dx11;
+            ulong tempAddr = Memory.ReadMemory<ulong>(baseAddr);
+            
+
+            for (int i = 0; i < offsets.Count() - 1; i++)
+            {
+                tempAddr = Memory.ReadMemory<ulong>(tempAddr + offsets[i]);
                 await Task.Delay(100);
             }
-            fovAddr = tempAddr + fovoffsets.Last();
+            fovAddr = tempAddr + offsets.Last();
             fovValue = GetFOVValue(); //Field of Vision value as displayed in Cheat Engine | 70 = 0, 80 = 2, 90 = 4
             if (File.Exists("RE7FOV.ini") && config.KeyExists("FOV"))
             {
@@ -69,61 +83,7 @@ namespace RE7FOV
             actualFOVValue = GetActualFOV(fovValue); //Field of Vision value as shown in-game
             fovValueLabel.Text = actualFOVValue.ToString();
             fovBar.Enabled = true;
-            pictureBox1.Visible = true;
-            if (fovValue < fovBar.Maximum + 1) fovBar.Value = fovValue;
-        }
-
-        async void SetFOVDLC2()
-        {
-            ulong baseAddr = (ulong)Memory.process.MainModule.BaseAddress + 0x08F8D9A8;
-            ulong tempAddr = Memory.ReadMemory<ulong>(baseAddr);
-
-            ulong[] fovoffsets = { 0xE0, 0x98, 0x120, 0x188, 0xC0, 0x60, 0x18 }; //End of Zoe FOV offsets
-
-            for (int i = 0; i < 6; i++)
-            {
-                tempAddr = Memory.ReadMemory<ulong>(tempAddr + fovoffsets[i]);
-                await Task.Delay(100);
-            }
-            fovAddr = tempAddr + fovoffsets.Last();
-            fovValue = GetFOVValue(); //Field of Vision value as displayed in Cheat Engine | 70 = 0, 80 = 2, 90 = 4
-            if (File.Exists("RE7FOV.ini") && config.KeyExists("FOV"))
-            {
-                fovValue = int.Parse(config.Read("FOV"));
-                fovValueLabel.Text = actualFOVValue.ToString();
-                Memory.WriteMemory<int>(fovAddr, fovValue);
-            }
-            actualFOVValue = GetActualFOV(fovValue); //Field of Vision value as shown in-game
-            fovValueLabel.Text = actualFOVValue.ToString();
-            fovBar.Enabled = true;
-            pictureBox1.Visible = true;
-            if (fovValue < fovBar.Maximum + 1) fovBar.Value = fovValue;
-        }
-
-        async void SetFOV()
-        {
-            ulong baseAddr = (ulong)Memory.process.MainModule.BaseAddress + 0x08F8D9A8;
-            ulong tempAddr = Memory.ReadMemory<ulong>(baseAddr);
-
-            ulong[] fovoffsets = { 0xD8, 0x178, 0xD8, 0x178, 0x50, 0x38, 0x148 }; //Main campaign FOV offsets
-
-            for (int i = 0; i < 6; i++)
-            {
-                tempAddr = Memory.ReadMemory<ulong>(tempAddr + fovoffsets[i]);
-                await Task.Delay(100);
-            }
-            fovAddr = tempAddr + fovoffsets.Last();
-            fovValue = GetFOVValue(); //Field of Vision value as displayed in Cheat Engine | 70 = 0, 80 = 2, 90 = 4
-            if (File.Exists("RE7FOV.ini") && config.KeyExists("FOV"))
-            {
-                fovValue = int.Parse(config.Read("FOV"));
-                fovValueLabel.Text = actualFOVValue.ToString();
-                Memory.WriteMemory<int>(fovAddr, fovValue);
-            }
-            actualFOVValue = GetActualFOV(fovValue); //Field of Vision value as shown in-game
-            fovValueLabel.Text = actualFOVValue.ToString();
-            fovBar.Enabled = true;
-            pictureBox1.Visible = true;
+            refreshBtn.Visible = true;
             if (fovValue < fovBar.Maximum + 1) fovBar.Value = fovValue;
         }
 
@@ -155,51 +115,42 @@ namespace RE7FOV
             Process.Start("https://github.com/linkthehylian/RE7FOV");
         }
 
-        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            if (fovBar.Enabled && File.Exists("RE7FOV.ini") && int.Parse(config.Read("FOV")) != fovValue)
-            {
-                fovValue = Memory.ReadMemory<int>(fovAddr);
-                config.Write("FOV", fovValue.ToString(), "RE7FOV");
-            }
-        }
-
         private void Main_MouseHover(object sender, EventArgs e)
         {
-            new ToolTip().SetToolTip(pictureBox1, "Refresh");
+            new ToolTip().SetToolTip(refreshBtn, "Refresh");
         }
 
-        private void pictureBox1_Click(object sender, EventArgs e)
+        private void dlc1Box_CheckedChanged(object sender, EventArgs e)
         {
-            Form1_Load(sender, e);
-        }
-
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkBox1.Checked)
+            if (dlc1Box.Checked)
             {
-                checkBox2.Enabled = false;
-                Form1_Load(sender, e);
+                dlc2Box.Enabled = false;
+                MainForm_Load(sender, e);
             }
             else
             {
-                checkBox2.Enabled = true;
-                Form1_Load(sender, e);
+                dlc2Box.Enabled = true;
+                MainForm_Load(sender, e);
             }
         }
 
-        private void checkBox2_CheckedChanged(object sender, EventArgs e)
+        private void dlc2Box_CheckedChanged(object sender, EventArgs e)
         {
-            if (checkBox2.Checked)
+            if (dlc2Box.Checked)
             {
-                checkBox1.Enabled = false;
-                Form1_Load(sender, e);
+                dlc1Box.Enabled = false;
+                MainForm_Load(sender, e);
             }
             else
             {
-                checkBox1.Enabled = true;
-                Form1_Load(sender, e);
+                dlc1Box.Enabled = true;
+                MainForm_Load(sender, e);
             }
+        }
+
+        private void refreshBtn_Click(object sender, EventArgs e)
+        {
+            MainForm_Load(sender, e);
         }
     }
 }

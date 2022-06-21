@@ -6,3 +6,6 @@ obj/Debug/RE7FOV.exe
 *.pdb
 *.cache
 *.pdb
+/obj
+/bin
+/.vs

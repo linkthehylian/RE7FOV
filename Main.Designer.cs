@@ -1,7 +1,7 @@
 ﻿
 namespace RE7FOV
 {
-    partial class Main
+    partial class MainForm
     {
         /// <summary>
         /// Required designer variable.
@@ -29,18 +29,18 @@ namespace RE7FOV
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.fovBar = new System.Windows.Forms.TrackBar();
             this.fovLabel = new System.Windows.Forms.Label();
             this.fovValueLabel = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.label2 = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.refreshBtn = new System.Windows.Forms.PictureBox();
+            this.dlc1Box = new System.Windows.Forms.CheckBox();
+            this.dlc2Box = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.fovBar)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.refreshBtn)).BeginInit();
             this.SuspendLayout();
             // 
             // fovBar
@@ -102,50 +102,50 @@ namespace RE7FOV
             this.label2.TabIndex = 5;
             this.label2.Text = "v2.0";
             // 
-            // pictureBox1
+            // refreshBtn
             // 
-            this.pictureBox1.Image = global::RE7FOV.Properties.Resources._242_2424608_file_refresh_refresh_icon_png;
-            this.pictureBox1.Location = new System.Drawing.Point(345, 3);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(26, 24);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.pictureBox1.TabIndex = 6;
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.Visible = false;
-            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
+            this.refreshBtn.Image = global::RE7FOV.Properties.Resources._242_2424608_file_refresh_refresh_icon_png;
+            this.refreshBtn.Location = new System.Drawing.Point(345, 3);
+            this.refreshBtn.Name = "refreshBtn";
+            this.refreshBtn.Size = new System.Drawing.Size(26, 24);
+            this.refreshBtn.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.refreshBtn.TabIndex = 6;
+            this.refreshBtn.TabStop = false;
+            this.refreshBtn.Visible = false;
+            this.refreshBtn.Click += new System.EventHandler(this.refreshBtn_Click);
             // 
-            // checkBox1
+            // dlc1Box
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(131, 89);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(79, 17);
-            this.checkBox1.TabIndex = 7;
-            this.checkBox1.Text = "Not A Hero";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            this.dlc1Box.AutoSize = true;
+            this.dlc1Box.Location = new System.Drawing.Point(131, 89);
+            this.dlc1Box.Name = "dlc1Box";
+            this.dlc1Box.Size = new System.Drawing.Size(79, 17);
+            this.dlc1Box.TabIndex = 7;
+            this.dlc1Box.Text = "Not A Hero";
+            this.dlc1Box.UseVisualStyleBackColor = true;
+            this.dlc1Box.CheckedChanged += new System.EventHandler(this.dlc1Box_CheckedChanged);
             // 
-            // checkBox2
+            // dlc2Box
             // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(216, 89);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(79, 17);
-            this.checkBox2.TabIndex = 8;
-            this.checkBox2.Text = "End of Zoe";
-            this.checkBox2.UseVisualStyleBackColor = true;
-            this.checkBox2.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
+            this.dlc2Box.AutoSize = true;
+            this.dlc2Box.Location = new System.Drawing.Point(216, 89);
+            this.dlc2Box.Name = "dlc2Box";
+            this.dlc2Box.Size = new System.Drawing.Size(79, 17);
+            this.dlc2Box.TabIndex = 8;
+            this.dlc2Box.Text = "End of Zoe";
+            this.dlc2Box.UseVisualStyleBackColor = true;
+            this.dlc2Box.CheckedChanged += new System.EventHandler(this.dlc2Box_CheckedChanged);
             // 
-            // Main
+            // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.ClientSize = new System.Drawing.Size(434, 111);
-            this.Controls.Add(this.checkBox2);
-            this.Controls.Add(this.checkBox1);
-            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.dlc2Box);
+            this.Controls.Add(this.dlc1Box);
+            this.Controls.Add(this.refreshBtn);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.linkLabel1);
             this.Controls.Add(this.label1);
@@ -156,14 +156,14 @@ namespace RE7FOV
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
-            this.Name = "Main";
+            this.Name = "MainForm";
             this.Text = "RE7FOV";
             this.TopMost = true;
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
-            this.Load += new System.EventHandler(this.Form1_Load);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
+            this.Load += new System.EventHandler(this.MainForm_Load);
             this.MouseHover += new System.EventHandler(this.Main_MouseHover);
             ((System.ComponentModel.ISupportInitialize)(this.fovBar)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.refreshBtn)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -177,9 +177,9 @@ namespace RE7FOV
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.LinkLabel linkLabel1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.CheckBox checkBox2;
+        private System.Windows.Forms.PictureBox refreshBtn;
+        private System.Windows.Forms.CheckBox dlc1Box;
+        private System.Windows.Forms.CheckBox dlc2Box;
     }
 }
 
