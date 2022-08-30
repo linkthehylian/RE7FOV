@@ -12,9 +12,6 @@ Also compatible with **BIOHAZARD 7 resident evil グロテスクVer.** (same ["r
 ### Requirements
 - .NET Framework 4.7.2 or higher
 
-### Disclaimer
-- RE7FOV **does not** work in `Fullscreen`. Switch to either `Windowed` or `Borderless Window`.
-
 ### Credits
 - linkthehylian
 - [FaithZe](https://github.com/faiithze)
