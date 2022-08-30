@@ -43,8 +43,20 @@ namespace RE7FOV
                 SetFOV(FOVOffsets.dlc1);
             if (dlc2Box.Checked) //End of Zoe
                 SetFOV(FOVOffsets.dlc2);
-            else
-                SetFOV(FOVOffsets.main);
+            if (OldVersion()) SetFOV(FOVOffsets.dx11);
+            else SetFOV(FOVOffsets.main);
+        }
+
+        bool OldVersion()
+        {
+            //Detect what version of RE7 is being played. "D3D12" folder and "D3D12Core.dll" file only exist in the next-gen version.
+            //If the above folder and file don't exist, then the DirectX 11 version of RE7 is being played.
+
+            string[] x = Memory.process.MainModule.FileName.Split('\\');
+            string path = string.Join("\\", x.Take(x.Length - 1)) + "\\D3D12";
+            if (Directory.Exists(path) && File.Exists(path + "\\D3D12Core.dll")) return false;
+
+            return true;
         }
 
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
@@ -62,17 +74,36 @@ namespace RE7FOV
         /// <param name="offsets">different offsets depending on if playing DLC or not</param>
         async void SetFOV(ulong[] offsets)
         {
-            ulong baseAddr = (ulong)Memory.process.MainModule.BaseAddress + 0x08F8D9A8; //dx11 = 0x081F4EF8
-            //offsets = FOVOffsets.dx11;
-            ulong tempAddr = Memory.ReadMemory<ulong>(baseAddr);
-            
-
-            for (int i = 0; i < offsets.Count() - 1; i++)
+            switch (OldVersion())
             {
-                tempAddr = Memory.ReadMemory<ulong>(tempAddr + offsets[i]);
-                await Task.Delay(100);
+                case true:
+                    ulong baseAddr = (ulong)Memory.process.MainModule.BaseAddress + 0x081F4EF8; //dx11 = 0x081F4EF8
+                    ulong tempAddr = Memory.ReadMemory<ulong>(baseAddr);
+
+                    for (int i = 0; i < offsets.Count() - 1; i++)
+                    {
+                        tempAddr = Memory.ReadMemory<ulong>(tempAddr + offsets[i]);
+                        await Task.Delay(100);
+                    }
+                    fovAddr = tempAddr + offsets.Last();
+                    refreshBtn.Enabled = true;
+                    break;
+
+                default:
+                    dlc1Box.Enabled = true;
+                    dlc2Box.Enabled = true;
+                    ulong baseAddrNew = (ulong)Memory.process.MainModule.BaseAddress + 0x08F8D9A8; //Next-gen = 0x08F8D9A8
+                    ulong tempAddrNew = Memory.ReadMemory<ulong>(baseAddrNew);
+
+                    for (int i = 0; i < offsets.Count() - 1; i++)
+                    {
+                        tempAddrNew = Memory.ReadMemory<ulong>(tempAddrNew + offsets[i]);
+                        await Task.Delay(100);
+                    }
+                    fovAddr = tempAddrNew + offsets.Last();
+                    refreshBtn.Enabled = true;
+                    break;
             }
-            fovAddr = tempAddr + offsets.Last();
             fovValue = GetFOVValue(); //Field of Vision value as displayed in Cheat Engine | 70 = 0, 80 = 2, 90 = 4
             if (File.Exists("RE7FOV.ini") && config.KeyExists("FOV"))
             {

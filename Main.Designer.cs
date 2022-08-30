@@ -33,7 +33,6 @@ namespace RE7FOV
             this.fovBar = new System.Windows.Forms.TrackBar();
             this.fovLabel = new System.Windows.Forms.Label();
             this.fovValueLabel = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.label2 = new System.Windows.Forms.Label();
             this.refreshBtn = new System.Windows.Forms.PictureBox();
@@ -72,16 +71,6 @@ namespace RE7FOV
             this.fovValueLabel.TabIndex = 2;
             this.fovValueLabel.Text = "0";
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(9, 89);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(134, 13);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "Developed by linkthehylian";
-            this.label1.Visible = false;
-            // 
             // linkLabel1
             // 
             this.linkLabel1.AutoSize = true;
@@ -100,10 +89,11 @@ namespace RE7FOV
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(28, 13);
             this.label2.TabIndex = 5;
-            this.label2.Text = "v2.0";
+            this.label2.Text = "v2.3";
             // 
             // refreshBtn
             // 
+            this.refreshBtn.Enabled = false;
             this.refreshBtn.Image = global::RE7FOV.Properties.Resources._242_2424608_file_refresh_refresh_icon_png;
             this.refreshBtn.Location = new System.Drawing.Point(345, 3);
             this.refreshBtn.Name = "refreshBtn";
@@ -111,12 +101,12 @@ namespace RE7FOV
             this.refreshBtn.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.refreshBtn.TabIndex = 6;
             this.refreshBtn.TabStop = false;
-            this.refreshBtn.Visible = false;
             this.refreshBtn.Click += new System.EventHandler(this.refreshBtn_Click);
             // 
             // dlc1Box
             // 
             this.dlc1Box.AutoSize = true;
+            this.dlc1Box.Enabled = false;
             this.dlc1Box.Location = new System.Drawing.Point(131, 89);
             this.dlc1Box.Name = "dlc1Box";
             this.dlc1Box.Size = new System.Drawing.Size(79, 17);
@@ -128,6 +118,7 @@ namespace RE7FOV
             // dlc2Box
             // 
             this.dlc2Box.AutoSize = true;
+            this.dlc2Box.Enabled = false;
             this.dlc2Box.Location = new System.Drawing.Point(216, 89);
             this.dlc2Box.Name = "dlc2Box";
             this.dlc2Box.Size = new System.Drawing.Size(79, 17);
@@ -148,7 +139,6 @@ namespace RE7FOV
             this.Controls.Add(this.refreshBtn);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.linkLabel1);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.fovValueLabel);
             this.Controls.Add(this.fovLabel);
             this.Controls.Add(this.fovBar);
@@ -158,7 +148,6 @@ namespace RE7FOV
             this.MaximizeBox = false;
             this.Name = "MainForm";
             this.Text = "RE7FOV";
-            this.TopMost = true;
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.MouseHover += new System.EventHandler(this.Main_MouseHover);
@@ -174,7 +163,6 @@ namespace RE7FOV
         private System.Windows.Forms.TrackBar fovBar;
         private System.Windows.Forms.Label fovLabel;
         private System.Windows.Forms.Label fovValueLabel;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.LinkLabel linkLabel1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.PictureBox refreshBtn;
