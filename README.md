@@ -9,6 +9,9 @@ Also compatible with **BIOHAZARD 7 resident evil グロテスクVer.** (same ["r
 - Launch RE7FOV
 - Adjust the FOV slider to your desired value
 
+### Disclaimer
+- Entering the "**Options**" menu or exiting to the main menu will reset the modified FOV.
+
 ### Requirements
 - .NET Framework 4.7.2 or higher
 
