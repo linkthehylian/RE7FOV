@@ -36,7 +36,7 @@ namespace RE7FOV
             {
                 if (Memory.GetProcess("re7")) break;
                 Text = "RE7FOV - Game Not Found";
-                await Task.Delay(1000);
+                await Task.Delay(100);
             }
             Text = $"RE7FOV - {Memory.process.ProcessName}.exe";
             if (dlc1Box.Checked) //Not A Hero
