@@ -13,7 +13,7 @@ Also compatible with **BIOHAZARD 7 resident evil グロテスクVer.** (same ["r
 - Adjust the FOV slider to your desired value
 
 ### Disclaimer
-- Performing any of the following actions will reset the modified FOV
+- Performing any of the following actions will reset the modified FOV once it's been applied
   - Entering the "**Options**" menu (even if no settings are altered, simply entering the menu will reset it)
   - Exiting to the main menu
   - Closing the game
